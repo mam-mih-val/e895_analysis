@@ -29,7 +29,8 @@ public:
     return tracks_config_;
   }
   [[nodiscard]] AnalysisTree::EventHeader *GetEventHeader() const { return event_header_; }
-  [[nodiscard]] AnalysisTree::TrackDetector *GetTracks() const { return tracks_; }
+  [[nodiscard]] AnalysisTree::Particles *GetTracks() const { return tracks_; }
+  [[nodiscard]] const AnalysisTree::DataHeader &GetDataHeader() const { return data_header_; }
   void CheckIfNewFile();
   void WriteDataHeader(const std::string& colliding_system, double energy);
 
@@ -44,7 +45,7 @@ private:
   AnalysisTree::BranchConfig tracks_config_;
 
   AnalysisTree::EventHeader*event_header_{nullptr};
-  AnalysisTree::TrackDetector*tracks_{nullptr};
+  AnalysisTree::Particles *tracks_{nullptr};
 };
 
 #endif // MCPICO2AT_SRC_OUT_TREE_MANAGER_H_
