@@ -18,11 +18,25 @@ void Converter::Run() {
   auto out_tracks_config = out_tree_.GetParticlesConfig();
   const auto y_beam = data_header.GetBeamRapidity();
 
+  const std::vector<float> impact_parameters{ 2, 3, 4, 5, 6, 7, 8, 9 };
+  const std::vector<float> cross_section{ 1.8, 4.2, 7.4, 12, 17, 23, 30, 38 };
+  std::vector<int> multiplicity_range;
+  if( fabs( energy_ - 2.0 ) < std::numeric_limits<float>::min()  )
+    multiplicity_range = {190, 175, 160, 140, 125, 105, 85, 60};
+  if( fabs( energy_ - 4.0 ) < std::numeric_limits<float>::min()  )
+    multiplicity_range = {260, 235, 210, 180, 155, 120, 90, 60};
+  if( fabs( energy_ - 6.0 ) < std::numeric_limits<float>::min()  )
+    multiplicity_range = {285, 260, 230, 200, 170, 135, 95, 60};
+  if( fabs( energy_ - 8.0 ) < std::numeric_limits<float>::min()  )
+    multiplicity_range = {320, 290, 260, 225, 190, 145, 105, 60};
+
   const auto id_event_header_int_run_id = out_event_header_config.GetFieldId("run_id");
   const auto id_event_header_int_ievnt = out_event_header_config.GetFieldId("event_id");
   const auto id_event_header_int_ntrks_g = out_event_header_config.GetFieldId("M");
   const auto id_event_header_int_mfilt_g = out_event_header_config.GetFieldId("selected_M");
   const auto id_event_header_int_nv0_g = out_event_header_config.GetFieldId("N_V0");
+  const auto id_event_header_float_centrality = out_event_header_config.GetFieldId("centrality");
+  const auto id_event_header_float_b = out_event_header_config.GetFieldId("b");
   const auto id_event_header_float_qphi_g = out_event_header_config.GetFieldId("psi_ep");
   const auto id_event_header_float_dqphi_g = out_event_header_config.GetFieldId("err_psi_ep");
   const auto id_event_header_float_phi12_g = out_event_header_config.GetFieldId("psi12");
@@ -81,7 +95,20 @@ void Converter::Run() {
     out_event_header->SetField( float(qycorr_g), id_event_header_float_qycorr_g );
     out_event_header->SetField( int(n), id_event_header_int_n );
 
-    int multiplicity = 0;
+    auto multiplicity = mfilt_g;
+    auto centrality = -1.0f;
+    auto impact_parameter = -1.0f;
+    int idx = 0;
+    float bin_edge = multiplicity_range[idx];
+    while( multiplicity < bin_edge &&
+           idx < multiplicity_range.size()-1 ){
+      idx++;
+      bin_edge = multiplicity_range[idx];
+    }
+    centrality = (cross_section[idx-1] + cross_section[idx])/2.0f;
+    impact_parameter = (impact_parameters[idx-1] + impact_parameters[idx])/2.0f;
+    out_event_header->SetField( float(centrality), id_event_header_float_centrality );
+    out_event_header->SetField( float(impact_parameter), id_event_header_float_b );
     for( int i=0; i<n; ++i ){
       auto [px, py, pz] = in_chain_.GetMomentum(i);
       auto itrk = in_chain_.GetItrk(i);

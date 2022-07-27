@@ -16,6 +16,7 @@ public:
   ~Converter() = default;
   void SetCollidingSystem(const std::string &colliding_system, double energy) {
     colliding_system_ = colliding_system;
+    energy_ = energy;
     beta_cm_ = sqrt( 1 - 4*0.938*0.938 / energy / energy);
     gama_cm_ = 1.0 / sqrt( 1.0 - beta_cm_*beta_cm_ );
     out_tree_.WriteDataHeader( colliding_system, energy );
@@ -25,6 +26,7 @@ public:
 private:
   int run_id_;
   std::string colliding_system_;
+  double energy_; // Beam energy in AGeV
   double beta_cm_;
   double gama_cm_;
   InputChain in_chain_;

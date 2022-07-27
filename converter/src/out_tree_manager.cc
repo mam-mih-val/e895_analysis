@@ -18,6 +18,8 @@ OutTreeManager::OutTreeManager(const std::string &out_file_name,
   event_header_config_.AddField<int>( "M", "multiplicity for centrality determination" );
   event_header_config_.AddField<int>( "selected_M", "Selected multiplicity for centrality" );
   event_header_config_.AddField<int>( "N_V0", "number of V0 candidated" );
+  event_header_config_.AddField<float>( "centrality", "(%) based on selected multiplicity" );
+  event_header_config_.AddField<float>( "b", "(fm) based on selected multiplicity" );
   event_header_config_.AddField<float>( "psi_ep", "Event plane angle" );
   event_header_config_.AddField<float>( "err_psi_ep", "dispersion of EP-angle" );
   event_header_config_.AddField<float>( "psi12", "RS difference" );
