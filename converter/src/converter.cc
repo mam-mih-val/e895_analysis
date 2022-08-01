@@ -77,9 +77,9 @@ void Converter::Run() {
     auto n_trks_g = in_chain_.GetNtrksG();
     auto mfilt_g = in_chain_.GetMfiltG();
     auto nv0_g = in_chain_.GetNv0G();
-    auto qphi_g = in_chain_.GetQphiG();
-    auto dqphi_g = in_chain_.GetDqphiG();
-    auto phi12_g = in_chain_.GetPhi12G();
+    auto qphi_g = in_chain_.GetQphiG() * TMath::DegToRad();
+    auto dqphi_g = in_chain_.GetDqphiG() * TMath::DegToRad();
+    auto phi12_g = in_chain_.GetPhi12G() * TMath::DegToRad();
     auto qxcorr_g = in_chain_.GetQxcorrG();
     auto qycorr_g = in_chain_.GetQycorrG();
     auto n = in_chain_.GetN();
