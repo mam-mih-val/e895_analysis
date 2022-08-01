@@ -1,0 +1,103 @@
+_layouts:
+
+_axes:
+  - &centrality
+    name: event_header/centrality
+    nb: 10
+    lo: 0
+    hi: 100
+  - &impact_parameter
+    name: event_header/b
+    nb: 8
+    lo: 1.5
+    hi: 9.5
+  - &ax-protons-pT {name: tracks/pT, nb: 10, lo: 0.0, hi: 2.}
+  - &ax-pions-pT {name: tracks/pT, nb: 10, lo: 0.0, hi: 1.}
+  - &ax-y {name: tracks/y_norm, nb: 20, lo: -1.0, hi: 1.0}
+
+
+_cuts:
+  - &good-protons
+    tracks/pid : { equals: 2212 }
+    tracks/primary : { equals: 1 }
+  - &good-pi-neg
+    tracks/pid : { equals: -211 }
+    tracks/primary : { equals: 1 }
+  - &good-pi-pos
+    tracks/pid : { equals: 211 }
+    tracks/primary : { equals: 1 }
+  - &fragments-1-cuts
+    tracks/y_norm : { range: [0.8, 0.9] }
+    tracks/baryon : { equals: 1 }
+  - &fragments-2-cuts
+    tracks/y_norm : { range: [0.9, 1.0] }
+    tracks/baryon : { equals: 1 }
+  - &fragments-3-cuts
+    tracks/y_norm : { range: [1.0, 1.1] }
+    tracks/baryon : { equals: 1 }
+
+E895:
+  event-variables:
+    - event_header/b
+  axes: [ *impact_parameter ]
+  q-vectors:
+  # PARTICLES
+  - name: proton
+    type: track
+    phi:  tracks/phi
+    weight: Ones
+    norm: m
+    axes:
+      - *ax-y
+      - *ax-protons-pT
+    cuts: *good-protons
+  - name: pi_neg
+    type: track
+    phi:  tracks/phi
+    weight: Ones
+    norm: m
+    axes:
+      - *ax-y
+      - *ax-pions-pT
+    cuts: *good-pi-neg
+  - name: pi_pos
+    type: track
+    phi:  tracks/phi
+    weight: Ones
+    norm: m
+    axes:
+      - *ax-y
+      - *ax-pions-pT
+    cuts: *good-pi-pos
+
+#  Fragments
+  - name: F1
+    type: track
+    phi: tracks/phi
+    weight: Ones
+    norm: m
+    cuts: *fragments-1-cuts
+  - name: F2
+    type: track
+    phi: tracks/phi
+    weight: Ones
+    norm: m
+    cuts: *fragments-2-cuts
+  - name: F3
+    type: track
+    phi: tracks/phi
+    weight: Ones
+    norm: m
+    cuts: *fragments-3-cuts
+
+  # REFERENCE PSI RP
+  - name: e895_ep
+    type: psi
+    phi: event_header/psi_ep
+    weight: Ones
+    norm: mag
+  - name: e895_R1
+    type: psi
+    phi: event_header/psi12
+    weight: Ones
+    norm: mag

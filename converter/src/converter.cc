@@ -66,6 +66,7 @@ void Converter::Run() {
   const auto id_tracks_float_y_cm = out_tracks_config.GetFieldId("y_cm");
   const auto id_tracks_float_y_normalized = out_tracks_config.GetFieldId("y_norm");
   const auto id_tracks_bool_primary = out_tracks_config.GetFieldId("primary");
+  const auto id_tracks_bool_baryon = out_tracks_config.GetFieldId("baryon");
 
 
   int n_events=0;
@@ -156,6 +157,11 @@ void Converter::Run() {
       auto y = 0.5 * log( ( E + pz ) / ( E - pz ) );
       auto y_cm = y - y_beam;
       auto y_norm = y_cm / y_beam;
+      auto is_baryon = true;
+      if( fabs(pid) == 211 )
+        is_baryon = false;
+      if( fabs(pid) == 321 )
+        is_baryon = false;
 
       track.SetMomentum( float(px), float(py), float(pz) );
 
@@ -179,6 +185,7 @@ void Converter::Run() {
       track.SetField(float(inv_mass), id_tracks_float_inv_mass);
       track.SetField(float(nnet), id_tracks_float_nnet);
       track.SetField(primary, id_tracks_bool_primary);
+      track.SetField(is_baryon, id_tracks_bool_baryon);
       track.SetField(float(y_cm), id_tracks_float_y_cm);
       track.SetField(float(y_norm), id_tracks_float_y_normalized);
     }

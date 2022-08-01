@@ -1,0 +1,119 @@
+_detectors: &detectors
+# ----- un-vectors -----
+  - name: proton
+    tags: [ un_vector, proton ]
+  - name: pi_neg
+    tags: [ un_vector, pi_neg ]
+  - name: pi_pos
+    tags: [ un_vector, pi_neg ]
+# ----- Fragments vectors -----
+  - name: F1
+    tags: [ fragment_vector, f1_vector ]
+  - name: F2
+    tags: [ fragment_vector, f2_vector ]
+  - name: F3
+    tags: [ fragment_vector, f3_vector ]
+# ----- Event plane from E895 trees -----
+  - name: e895_ep
+    tags: [ psi_vector ]
+# ----- Event plane resolution from E895 trees -----
+  - name: e895_R1
+    tags: [ R1_vector ]
+
+_axes:
+  - &centrality
+    name: event_header_centrality
+    nb: 10
+    lo: 0
+    hi: 100
+  - &impact_parameter
+    name: event_header/b
+    nb: 8
+    lo: 1.5
+    hi: 9.5
+
+_components:
+  - &sp1_components [ x1,y1 ]
+  - &sp2_components [ x2,y2 ]
+  - &sp3_components [ x3,y3 ]
+
+_tasks_args:
+
+# ----- Task array for sim un vectors -----
+  - &ta_u1
+    query: { tags: { any-in: [ un_vector ] } }
+    query-list: *detectors
+    components: *sp1_components
+    correction-steps: [ plain ]
+  - &ta_u2
+    query: { tags: { any-in: [ un_vector ] } }
+    query-list: *detectors
+    components: *sp2_components
+    correction-steps: [ plain ]
+
+# ----- Task array for SP components of FHCal vectors -----
+  - &ta_fragments
+    query: { tags: { any-in: [ fragment_vector ] } }
+    query-list: *detectors
+    components: *sp1_components
+    correction-steps: [ plain ]
+    
+# ----- Task array for true RP vector -----
+  - &ta_e895_psi1
+    query: { tags: { any-in: [ psi_vector ] } }
+    query-list: *detectors
+    components: *sp1_components
+    correction-steps: [ plain ]
+  - &ta_e895_psi2
+    query: { tags: { any-in: [ psi_vector ] } }
+    query-list: *detectors
+    components: *sp2_components
+    correction-steps: [ plain ]
+  - &ta_e895_R1
+    query: { tags: { any-in: [ R1_vector ] } }
+    query-list: *detectors
+    components: *sp1_components
+    correction-steps: [ plain ]
+
+_tasks:
+# *******************************************
+# TRUE RP
+# *******************************************
+
+# ----- v1 relative to the E895 EP -----
+  - args: [*ta_u1, *ta_e895_psi1]
+    n-samples: 100
+    weights-type: observable
+    folder: "/SP/E985/u1Q1"
+    axes: [ *impact_parameter ]
+
+# ----- v2 relative to the E895 EP -----
+  - args: [*ta_u2, *ta_e895_psi2]
+    n-samples: 100
+    weights-type: observable
+    folder: "/SP/E985/u2Q2"
+    axes: [ *impact_parameter ]
+
+# ----- v2 relative to the E895 EP -----
+  - args: [*ta_e895_R1]
+    n-samples: 100
+    weights-type: reference
+    folder: "/SP/E985/R1"
+    axes: [ *impact_parameter ]
+
+
+# *******************************************
+# Fragments
+# *******************************************
+
+# ----- < u, F > -----
+  - args: [*ta_u1, *ta_fragments]
+    n-samples: 100
+    weights-type: observable
+    folder: "/SP/Fragments/u1Q1"
+    axes: [ *impact_parameter ]
+  - args: [*ta_fragments, *ta_fragments]
+    n-samples: 100
+    weights-type: reference
+    folder: "/SP/Fragments/Q1Q1"
+    axes: [ *impact_parameter ]

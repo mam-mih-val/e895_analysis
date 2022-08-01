@@ -54,6 +54,7 @@ OutTreeManager::OutTreeManager(const std::string &out_file_name,
   tracks_config_.AddField<float>("y_cm", "Rapidity based on PID");
   tracks_config_.AddField<float>("y_norm", "y_cm / y_beam");
   tracks_config_.AddField<bool>("primary", "If the particle is primary");
+  tracks_config_.AddField<bool>("baryon", "If the particle is primary");
   configuration_.AddBranchConfig(tracks_config_);
   tracks_ = new AnalysisTree::Particles (tracks_config_.GetId() );;
 
