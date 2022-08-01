@@ -29,8 +29,8 @@ _axes:
   - &impact_parameter
     name: event_header_b
     nb: 8
-    lo: 1.5
-    hi: 9.5
+    lo: 2.0
+    hi: 9.0
 
 _components:
   - &sp1_components [ x1,y1 ]
@@ -44,19 +44,19 @@ _tasks_args:
     query: { tags: { any-in: [ un_vector ] } }
     query-list: *detectors
     components: *sp1_components
-    correction-steps: [ plain ]
+    correction-steps: [ plain, recentered, rescaled ]
   - &ta_u2
     query: { tags: { any-in: [ un_vector ] } }
     query-list: *detectors
     components: *sp2_components
-    correction-steps: [ plain ]
+    correction-steps: [ plain, recentered, rescaled ]
 
 # ----- Task array for SP components of FHCal vectors -----
   - &ta_fragments
     query: { tags: { any-in: [ fragment_vector ] } }
     query-list: *detectors
     components: *sp1_components
-    correction-steps: [ plain ]
+    correction-steps: [ plain, recentered, rescaled ]
     
 # ----- Task array for true RP vector -----
   - &ta_e895_psi1
