@@ -19,12 +19,15 @@ _axes:
 _cuts:
   - &good-protons
     tracks/pid : { equals: 2212 }
+    tracks/pT : { range: [0.1, 2.0] }
     tracks/primary : { equals: 1 }
   - &good-pi-neg
     tracks/pid : { equals: -211 }
+    tracks/pT : { range: [0.1, 2.0] }
     tracks/primary : { equals: 1 }
   - &good-pi-pos
     tracks/pid : { equals: 211 }
+    tracks/pT : { range: [0.1, 2.0] }
     tracks/primary : { equals: 1 }
   - &fragments-1-cuts
     tracks/y_norm : { range: [1.2, 2.0] }
