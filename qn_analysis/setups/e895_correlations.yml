@@ -45,11 +45,13 @@ _tasks_args:
     query-list: *detectors
     components: *sp1_components
     correction-steps: [ plain, recentered, rescaled ]
+    weight: sumw
   - &ta_u2
     query: { tags: { any-in: [ un_vector ] } }
     query-list: *detectors
     components: *sp2_components
     correction-steps: [ plain, recentered, rescaled ]
+    weight: sumw
 
 # ----- Task array for SP components of FHCal vectors -----
   - &ta_fragments
@@ -57,23 +59,27 @@ _tasks_args:
     query-list: *detectors
     components: *sp1_components
     correction-steps: [ plain, recentered, rescaled ]
-    
+    weight: ones
+
 # ----- Task array for true RP vector -----
   - &ta_e895_psi1
     query: { tags: { any-in: [ psi_vector ] } }
     query-list: *detectors
     components: *sp1_components
     correction-steps: [ plain ]
+    weight: ones
   - &ta_e895_psi2
     query: { tags: { any-in: [ psi_vector ] } }
     query-list: *detectors
     components: *sp2_components
     correction-steps: [ plain ]
+    weight: ones
   - &ta_e895_R1
     query: { tags: { any-in: [ R1_vector ] } }
     query-list: *detectors
     components: *sp1_components
     correction-steps: [ plain ]
+    weight: ones
 
 _tasks:
 # *******************************************
