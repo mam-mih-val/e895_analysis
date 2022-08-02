@@ -28,7 +28,7 @@ _axes:
     hi: 100
   - &impact_parameter
     name: event_header_b
-    nb: 8
+    nb: 7
     lo: 2.0
     hi: 9.0
 
@@ -84,21 +84,21 @@ _tasks:
   - args: [*ta_u1, *ta_e895_psi1]
     n-samples: 100
     weights-type: observable
-    folder: "/SP/E985/u1Q1"
+    folder: "/SP/E895/u1Q1"
     axes: [ *impact_parameter ]
 
 # ----- v2 relative to the E895 EP -----
   - args: [*ta_u2, *ta_e895_psi2]
     n-samples: 100
     weights-type: observable
-    folder: "/SP/E985/u2Q2"
+    folder: "/SP/E895/u2Q2"
     axes: [ *impact_parameter ]
 
 # ----- v2 relative to the E895 EP -----
   - args: [*ta_e895_R1]
     n-samples: 100
     weights-type: reference
-    folder: "/SP/E985/R1"
+    folder: "/SP/E895/R1"
     axes: [ *impact_parameter ]
 
 

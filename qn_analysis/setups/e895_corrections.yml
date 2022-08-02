@@ -8,7 +8,7 @@ _axes:
     hi: 100
   - &impact_parameter
     name: event_header/b
-    nb: 8
+    nb: 7
     lo: 2.0
     hi: 9.0
   - &ax-protons-pT {name: tracks/pT, nb: 10, lo: 0.0, hi: 2.}
@@ -28,12 +28,15 @@ _cuts:
     tracks/primary : { equals: 1 }
   - &fragments-1-cuts
     tracks/y_norm : { range: [1.2, 2.0] }
+    tracks/pT : { range: [0.1, 2.0] }
     tracks/baryon : { equals: 1 }
   - &fragments-2-cuts
     tracks/y_norm : { range: [0.4, 0.8] }
+    tracks/pT : { range: [0.1, 2.0] }
     tracks/baryon : { equals: 1 }
   - &fragments-3-cuts
-    tracks/y_norm : { range: [-1.0, -0.6] }
+    tracks/y_norm : { range: [-1.0, -0.5] }
+    tracks/pT : { range: [0.1, 2.0] }
     tracks/baryon : { equals: 1 }
 
 E895:
