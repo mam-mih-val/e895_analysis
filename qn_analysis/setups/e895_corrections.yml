@@ -21,7 +21,6 @@ _cuts:
     tracks/pid : { equals: 2212 }
     tracks/pT : { range: [0.1, 2.0] }
     tracks/primary : { equals: 1 }
-    tracks/weight : { equals: 0 }
   - &good-pi-neg
     tracks/pid : { equals: -211 }
     tracks/pT : { range: [0.1, 2.0] }
@@ -52,7 +51,7 @@ E895:
   - name: proton
     type: track
     phi:  tracks/phi
-    weight: Ones
+    weight: tracks/weight
     norm: m
     axes:
       - *ax-y
