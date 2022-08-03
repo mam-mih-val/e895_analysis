@@ -13,7 +13,7 @@ _axes:
     hi: 9.0
   - &ax-protons-pT {name: tracks/pT, nb: 10, lo: 0.0, hi: 2.}
   - &ax-pions-pT {name: tracks/pT, nb: 10, lo: 0.0, hi: 1.}
-  - &ax-y {name: tracks/y_norm, nb: 20, lo: -1.0, hi: 1.0}
+  - &ax-y {name: tracks/e895_y_cm, nb: 20, lo: -1.0, hi: 1.0}
 
 
 _cuts:
