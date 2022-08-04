@@ -46,7 +46,7 @@ _tasks_args:
   - &ta_e895_proton
     query: { tags: { any-in: [ e895_proton ] } }
     query-list: *detectors
-    components: [cos1, sin1]
+    components: [x1, y1]
     correction-steps: [ plain ]
     weight: sumw
 # ----- Task array for sim un vectors -----
