@@ -50,7 +50,7 @@ E895:
   # PARTICLES
   - name: e895_proton
     type: track
-    phi:  tracks/diffphi
+    phi:  tracks/qphi
     weight: Ones
     norm: m
     axes:
