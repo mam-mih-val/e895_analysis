@@ -80,6 +80,7 @@ void OutTreeManager::WriteDataHeader(const std::string &colliding_system,
   const double M=0.940;
   double sqrt_snn = sqrt( 4*M*M + 2*M*T );
   auto p_mom = sqrt_snn * sqrt( sqrt_snn*sqrt_snn / ( 4*M*M ) - 1 );
+//  auto p_mom = sqrt( T*T + 2*M*T );
   data_header_.SetBeamMomentum(p_mom);
   data_header_.Write("DataHeader");
 }

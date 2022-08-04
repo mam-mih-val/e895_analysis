@@ -1,4 +1,7 @@
 _detectors: &detectors
+# ----- E895 un-vectors -----
+  - name: e895_proton
+    tags: [ e895_proton ]
 # ----- un-vectors -----
   - name: proton
     tags: [ un_vector, proton ]
@@ -39,6 +42,13 @@ _components:
 
 _tasks_args:
 
+# ----- Task array for sim un vectors -----
+  - &ta_e895_proton
+    query: { tags: { any-in: [ e895_proton ] } }
+    query-list: *detectors
+    components: [x1, y1]
+    correction-steps: [ plain ]
+    weight: sumw
 # ----- Task array for sim un vectors -----
   - &ta_u1
     query: { tags: { any-in: [ un_vector ] } }
@@ -86,6 +96,12 @@ _tasks:
 # TRUE RP
 # *******************************************
 
+# ----- v1 relative to the E895 EP -----
+  - args: [*ta_e895_proton]
+    n-samples: 100
+    weights-type: observable
+    folder: "/SP/E895/u1"
+    axes: [ *impact_parameter ]
 # ----- v1 relative to the E895 EP -----
   - args: [*ta_u1, *ta_e895_psi1]
     n-samples: 100
