@@ -120,13 +120,14 @@ void Converter::Run() {
       auto z2 = in_chain_.GetZ2(i);
       auto z3 = in_chain_.GetZ3(i);
       auto dedx = in_chain_.GetDedx(i);
-      auto diffphi = in_chain_.GetDiffphi(i);
+      auto diffphi = in_chain_.GetDiffphi(i) * TMath::DegToRad();
       auto pzcm = in_chain_.GetPzcm(i);
-      auto qphi = in_chain_.GetQphi(i);
-      auto theta = in_chain_.GetTheta(i);
+      auto qphi = in_chain_.GetQphi(i) * TMath::DegToRad();
+      auto theta = in_chain_.GetTheta(i) * TMath::DegToRad();
       auto weight = in_chain_.GetWeight(i);
       auto e895_ylab = in_chain_.GetYlab(i);
       auto e895_ycm = in_chain_.GetYcm(i);
+      auto e895_ybeam = e895_ylab / (e895_ycm + 1);
       auto e895_y_norm = e895_ycm /y_beam;
       auto inv_mass = in_chain_.GetMass(i);
       auto nnet = in_chain_.GetNnet(i);
