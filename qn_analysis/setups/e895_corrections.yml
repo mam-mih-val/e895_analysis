@@ -51,7 +51,7 @@ E895:
   - name: proton
     type: track
     phi:  tracks/phi
-    weight: tracks/weight
+    weight: Ones
     norm: m
     axes:
       - *ax-y
