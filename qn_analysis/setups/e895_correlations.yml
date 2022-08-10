@@ -16,6 +16,10 @@ _detectors: &detectors
     tags: [ fragment_vector, f2_vector ]
   - name: F3
     tags: [ fragment_vector, f3_vector ]
+  - name: PiN
+    tags: [ fragment_vector, pin_vector ]
+  - name: PiP
+    tags: [ fragment_vector, pip_vector ]
 # ----- Event plane from E895 trees -----
   - name: e895_ep
     tags: [ psi_vector ]

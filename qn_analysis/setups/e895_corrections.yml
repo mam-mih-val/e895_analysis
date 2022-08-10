@@ -20,15 +20,15 @@ _cuts:
   - &good-protons
     tracks/pid : { equals: 2212 }
     tracks/pT : { range: [0.1, 2.0] }
-    tracks/primary : { equals: 1 }
+#    tracks/primary : { equals: 1 }
   - &good-pi-neg
     tracks/pid : { equals: -211 }
     tracks/pT : { range: [0.1, 2.0] }
-    tracks/primary : { equals: 1 }
+#    tracks/primary : { equals: 1 }
   - &good-pi-pos
     tracks/pid : { equals: 211 }
     tracks/pT : { range: [0.1, 2.0] }
-    tracks/primary : { equals: 1 }
+#    tracks/primary : { equals: 1 }
   - &fragments-1-cuts
     tracks/y_norm : { range: [1.2, 2.0] }
     tracks/pT : { range: [0.1, 2.0] }
@@ -37,6 +37,14 @@ _cuts:
     tracks/y_norm : { range: [0.4, 0.8] }
     tracks/pT : { range: [0.1, 2.0] }
     tracks/baryon : { equals: 1 }
+  - &pions-n-cuts
+    tracks/y_norm : { range: [-1.0, -0.5] }
+    tracks/pT : { range: [0.1, 0.5] }
+    tracks/pid : { equals: -211 }
+  - &pions-p-cuts
+    tracks/y_norm : { range: [0.5, 1.0] }
+    tracks/pT : { range: [0.1, 0.5] }
+    tracks/pid : { equals: -211 }
   - &fragments-3-cuts
     tracks/y_norm : { range: [-1.0, -0.5] }
     tracks/pT : { range: [0.1, 2.0] }
@@ -121,7 +129,24 @@ E895:
     corrections:
       - recentering
       - twist-and-rescale
-
+  - name: PiN
+    type: track
+    phi: tracks/phi
+    weight: Ones
+    norm: m
+    cuts: *pions-n-cuts
+    corrections:
+      - recentering
+      - twist-and-rescale
+  - name: PiP
+    type: track
+    phi: tracks/phi
+    weight: Ones
+    norm: m
+    cuts: *pions-p-cuts
+    corrections:
+      - recentering
+      - twist-and-rescale
   # REFERENCE PSI RP
   - name: e895_ep
     type: psi
