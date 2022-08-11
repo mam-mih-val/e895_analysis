@@ -42,21 +42,21 @@ echo "Running correction ..."
                                                                           -o correction_out.root \
                                                                           --yaml-config-file /scratch1/mmamaev/e895_analysis/qn_analysis/setups/e895_corrections.yml \
                                                                           --yaml-config-name E895
-#mv correction_out.root correction_in.root
-#/scratch1/mmamaev/QnAnalysis/build/src/QnAnalysisCorrect/QnAnalysisCorrect \
-#                                                                          -i list.txt \
-#                                                                          -t atree \
-#                                                                          -o correction_out.root \
-#                                                                          --yaml-config-file /scratch1/mmamaev/e895_analysis/qn_analysis/setups/e895_corrections.yml \
-#                                                                          --yaml-config-name E895
-#mv correction_out.root correction_in.root
-#/scratch1/mmamaev/QnAnalysis/build/src/QnAnalysisCorrect/QnAnalysisCorrect \
-#                                                                          -i list.txt \
-#                                                                          -t atree \
-#                                                                          -o correction_out.root \
-#                                                                          --yaml-config-file /scratch1/mmamaev/e895_analysis/qn_analysis/setups/e895_corrections.yml \
-#                                                                          --yaml-config-name E895
-#echo; date
+mv correction_out.root correction_in.root
+/scratch1/mmamaev/QnAnalysis/build/src/QnAnalysisCorrect/QnAnalysisCorrect \
+                                                                          -i list.txt \
+                                                                          -t atree \
+                                                                          -o correction_out.root \
+                                                                          --yaml-config-file /scratch1/mmamaev/e895_analysis/qn_analysis/setups/e895_corrections.yml \
+                                                                          --yaml-config-name E895
+mv correction_out.root correction_in.root
+/scratch1/mmamaev/QnAnalysis/build/src/QnAnalysisCorrect/QnAnalysisCorrect \
+                                                                          -i list.txt \
+                                                                          -t atree \
+                                                                          -o correction_out.root \
+                                                                          --yaml-config-file /scratch1/mmamaev/e895_analysis/qn_analysis/setups/e895_corrections.yml \
+                                                                          --yaml-config-name E895
+echo; date
 echo "Running correlation ..."
 /scratch1/mmamaev/QnAnalysis/build/src/QnAnalysisCorrelate/QnAnalysisCorrelate \
                                                                               --input-file correction_out.root \
