@@ -151,6 +151,11 @@ _tasks:
     weights-type: reference
     folder: "/SP/Fragments/Q1Q1"
     axes: [ *impact_parameter ]
+  - args: [*ta_u1, *ta_frag]
+    n-samples: 100
+    weights-type: observable
+    folder: "/SP/Fragments/u1Q1"
+    axes: [ *impact_parameter ]
   - args: [*ta_frag, *ta_frag]
     n-samples: 100
     weights-type: reference
