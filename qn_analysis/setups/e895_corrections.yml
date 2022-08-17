@@ -13,7 +13,7 @@ _axes:
     hi: 9.0
   - &ax-protons-pT {name: tracks/pT, nb: 10, lo: 0.0, hi: 2.}
   - &ax-pions-pT {name: tracks/pT, nb: 10, lo: 0.0, hi: 1.}
-  - &ax-y {name: tracks/e895_y_cm, nb: 10, lo: -1.0, hi: 1.0}
+  - &ax-y {name: tracks/e895_y_cm, nb: 20, lo: -1.0, hi: 2.0}
 
 
 _cuts:
@@ -32,6 +32,8 @@ _cuts:
   - &fragments-1-cuts
     tracks/y_norm : { range: [1.2, 2.0] }
     tracks/pT : { range: [0.1, 2.0] }
+    tracks/baryon : { equals: 1 }
+  - &fragments-all
     tracks/baryon : { equals: 1 }
   - &fragments-2-cuts
     tracks/y_norm : { range: [0.4, 0.8] }
@@ -102,6 +104,18 @@ E895:
       - recentering
       - twist-and-rescale
 #  Fragments
+  - name: fragments
+    type: track
+    phi: tracks/phi
+    weight: Ones
+    norm: m
+    axes:
+      - *ax-y
+      - *ax-protons-pT
+    cuts: { tracks/baryon : { equals: 1 } }
+    corrections:
+      - recentering
+      - twist-and-rescale
   - name: F1
     type: track
     phi: tracks/phi
